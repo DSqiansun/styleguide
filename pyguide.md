@@ -2,24 +2,25 @@
 AUTHORS:
 Prefer only GitHub-flavored Markdown in external text.
 See README.md for details.
+中文翻译版本，仅供参考
 -->
 
-# Google Python Style Guide
+# 谷歌Python代码风格指南
 
 
 <!-- https://github.com/google/styleguide/issues/566: Can this render properly on Github Pages? -->
 
 <details>
-  <summary>Table of Contents</summary>
+  <summary>目录</summary>
 
--   [1 Background](#s1-background)
--   [2 Python Language Rules](#s2-python-language-rules)
+-   [1 背景](#s1-background)
+-   [2 Python语言规则](#s2-python-language-rules)
     *   [2.1 Lint](#s2.1-lint)
         +   [2.1.1 Definition](#s2.1.1-definition)
         +   [2.1.2 Pros](#s2.1.2-pros)
         +   [2.1.3 Cons](#s2.1.3-cons)
         +   [2.1.4 Decision](#s2.1.4-decision)
-    *   [2.2 Imports](#s2.2-imports)
+    *   [2.2 导入](#s2.2-imports)
         +   [2.2.1 Definition](#s2.2.1-definition)
         +   [2.2.2 Pros](#s2.2.2-pros)
         +   [2.2.3 Cons](#s2.2.3-cons)
@@ -167,22 +168,20 @@ See README.md for details.
 <a id="1-background"></a>
 
 <a id="background"></a>
-## 1 Background 
+## 1 背景
 
-Python is the main dynamic language used at Google. This style guide is a list
-of *dos and don'ts* for Python programs.
+Python 在谷歌是一种主要的动态语言。这一个风格指南是对于Python语言*该和不该*做的列表。
 
-To help you format code correctly, we've created a [settings file for Vim](google_python_style.vim). For Emacs, the default settings should be fine.
+为了帮助你标准化代码，我们创建了 [settings file for Vim](google_python_style.vim). 对于 Emacs, 默认设置应该是可以了。
 
-Many teams use the [yapf](https://github.com/google/yapf/)
-auto-formatter to avoid arguing over formatting.
+很多团队使用[yapf](https://github.com/google/yapf/) 来自动标准化代码，避免代码格式争论。
 
 
 <a id="s2-python-language-rules"></a>
 <a id="2-python-language-rules"></a>
 
 <a id="python-language-rules"></a>
-## 2 Python Language Rules 
+## 2 Python 语言规则
 
 <a id="s2.1-lint"></a>
 <a id="21-lint"></a>
@@ -190,48 +189,41 @@ auto-formatter to avoid arguing over formatting.
 <a id="lint"></a>
 ### 2.1 Lint 
 
-Run `pylint` over your code.
+运行 `pylint` 遍历你的代码。
 
 <a id="s2.1.1-definition"></a>
 <a id="211-definition"></a>
 
 <a id="lint-definition"></a>
-#### 2.1.1 Definition 
+#### 2.1.1 定义 
 
-`pylint` is a tool for finding bugs and style problems in Python source
-code. It finds problems that are typically caught by a compiler for less dynamic
-languages like C and C++. Because of the dynamic nature of Python, some
-warnings may be incorrect; however, spurious warnings should be fairly
-infrequent.
+`pylint` 是一个检查 Python 代码 bugs 和风格问题的工具。它用来检查非动态语言像 C 和 C++。由于 Python 语言是动态化的，某些警告可能是不正确的。但是，虚假警告很少出现。 
 
 <a id="s2.1.2-pros"></a>
 <a id="212-pros"></a>
 
 <a id="lint-pros"></a>
-#### 2.1.2 Pros 
+#### 2.1.2 优点 
 
-Catches easy-to-miss errors like typos, using-vars-before-assignment, etc.
-
+捕获这样容易出错的错误，例如错别字，在创建之前使用变量。
 <a id="s2.1.3-cons"></a>
 <a id="213-cons"></a>
 
 <a id="lint-cons"></a>
-#### 2.1.3 Cons 
+#### 2.1.3 缺点 
 
-`pylint` isn't perfect. To take advantage of it, we'll need to sometimes: a)
-Write around it b) Suppress its warnings or c) Improve it.
+`pylint` 不是完美的。为了利用它，我们需要做一些事情: a)
+Write around it b) 删除警告 or c) 改善它.
 
 <a id="s2.1.4-decision"></a>
 <a id="214-decision"></a>
 
 <a id="lint-decision"></a>
-#### 2.1.4 Decision 
+#### 2.1.4 决定 
 
-Make sure you run `pylint` on your code.
+确保你使用 `pylint` 遍历代码。
 
-
-Suppress warnings if they are inappropriate so that other issues are not hidden.
-To suppress warnings, you can set a line-level comment:
+如果警告不合适，可以删除警告。可以通过对代码行注释来取消警告。
 
 ```python
 dict = 'something awful'  # Bad Idea... pylint: disable=redefined-builtin
@@ -280,108 +272,97 @@ that the arguments are actually unused.
 <a id="22-imports"></a>
 
 <a id="imports"></a>
-### 2.2 Imports 
+### 2.2 导入 
 
-Use `import` statements for packages and modules only, not for individual
-classes or functions. Note that there is an explicit exemption for imports from
-the [typing module](#typing-imports).
+使用 `import` 来导入软件包和模块, 不适用单个类和功能。注意，[typing module](#typing-imports) 是一个明确的解释。
 
 <a id="s2.2.1-definition"></a>
 <a id="221-definition"></a>
 
 <a id="imports-definition"></a>
-#### 2.2.1 Definition 
+#### 2.2.1 定义 
 
-Reusability mechanism for sharing code from one module to another.
+用于将代码从一个模块共享到另一个模块的可重用性机制。
 
 <a id="s2.2.2-pros"></a>
 <a id="222-pros"></a>
 
 <a id="imports-pros"></a>
-#### 2.2.2 Pros 
+#### 2.2.2 优点 
 
-The namespace management convention is simple. The source of each identifier is
-indicated in a consistent way; `x.Obj` says that object `Obj` is defined in
-module `x`.
+命名空间管理约定很简单。每个标识符的来源以一致的方式表示； `x.Obj` 说明 `Obj` 包含在 `x` 模块里.
 
 <a id="s2.2.3-cons"></a>
 <a id="223-cons"></a>
 
 <a id="imports-cons"></a>
-#### 2.2.3 Cons 
+#### 2.2.3 缺点 
 
-Module names can still collide. Some module names are inconveniently long.
+模块名字仍然可以冲突。一些模块名字很长。
 
 <a id="s2.2.4-decision"></a>
 <a id="224-decision"></a>
 
 <a id="imports-decision"></a>
-#### 2.2.4 Decision 
+#### 2.2.4 决定 
 
-* Use `import x` for importing packages and modules.
-* Use `from x import y` where `x` is the package prefix and `y` is the module
-name with no prefix.
-* Use `from x import y as z` if two modules named `y` are to be imported or if
-`y` is an inconveniently long name.
-* Use `import y as z` only when `z` is a standard abbreviation (e.g., `np` for
+* 使用 `import x` 来导入包和模块.
+* 使用 `from x import y` ， `x` 是包的前缀， `y` 没有前缀的模块.
+* 使用 `from x import y as z` 如果两个模块名字，  `y` 被导入或者如果
+`y` 名字很长.
+* 使用 `import y as z` 仅仅当 `z` 是一个标准的缩写 (比如, `np` 是
 `numpy`).
 
-For example the module `sound.effects.echo` may be imported as follows:
+比如，模块 `sound.effects.echo` 可以被导入:
 
 ```python
 from sound.effects import echo
 ...
 echo.EchoFilter(input, output, delay=0.7, atten=4)
 ```
+不要在导入过程中使用相对名称。即使模块在同一包中，使用完整的软件包名称。这要有助于防止意外导入两次。
 
-Do not use relative names in imports. Even if the module is in the same package,
-use the full package name. This helps prevent unintentionally importing a
-package twice.
-
-Imports from the [typing module](#typing-imports) and the
+导入 [typing module](#typing-imports) 和 
 [six.moves module](https://six.readthedocs.io/#module-six.moves)
-are exempt from this rule.
+不受此规则约束。
 
 <a id="s2.3-packages"></a>
 <a id="23-packages"></a>
 
 <a id="packages"></a>
-### 2.3 Packages 
+### 2.3 软件包 
 
-Import each module using the full pathname location of the module.
+使用完整的路径名来导入模块。
 
 <a id="s2.3.1-pros"></a>
 <a id="231-pros"></a>
 
 <a id="packages-pros"></a>
-#### 2.3.1 Pros 
+#### 2.3.1 优点 
 
-Avoids conflicts in module names or incorrect imports due to the module search
-path not being what the author expected.  Makes it easier to find modules.
+避免由于模块搜索路径不是作者期望的模块名称冲突或导入错误。 使查找模块更加容易
 
 <a id="s2.3.2-cons"></a>
 <a id="232-cons"></a>
 
 <a id="packages-cons"></a>
-#### 2.3.2 Cons 
+#### 2.3.2 缺点 
 
-Makes it harder to deploy code because you have to replicate the package
-hierarchy.  Not really a problem with modern deployment mechanisms.
-
+由于必须复制包的架构来部署代码。这并不是问题对于现代部署机制。
 <a id="s2.3.3-decision"></a>
 <a id="233-decision"></a>
 
 <a id="packages-decision"></a>
-#### 2.3.3 Decision 
+#### 2.3.3 决定 
 
-All new code should import each module by its full package name.
+所有新代码应该按照完整的路径来导入。
 
-Imports should be as follows:
+导入应该:
 
-Yes:
+好的:
 
 ```python
-# Reference absl.flags in code with the complete name (verbose).
+# 在代码中使用完整名称（详细）引用absl.flags。
 import absl.flags
 from doctor.who import jodie
 
@@ -389,70 +370,66 @@ FLAGS = absl.flags.FLAGS
 ```
 
 ```python
-# Reference flags in code with just the module name (common).
+# 代码中的引用标志仅带有模块名称（公用）。
 from absl import flags
 from doctor.who import jodie
 
 FLAGS = flags.FLAGS
 ```
 
-No: _(assume this file lives in `doctor/who/` where `jodie.py` also exists)_
+不好的: _(假设此文件位于 `doctor/who/` 包含 `jodie.py` )_
 
 ```python
-# Unclear what module the author wanted and what will be imported.  The actual
-# import behavior depends on external factors controlling sys.path.
-# Which possible jodie module did the author intend to import?
+# 不清楚作者想要什么模块，什么将被导入  
+# 实际的导入行为取决于控制sys.path的外部因素。
+# 作者打算导入哪个可能的jodie模块？
 import jodie
 ```
 
-The directory the main binary is located in should not be assumed to be in
-`sys.path` despite that happening in some environments.  This being the case,
-code should assume that `import jodie` refers to a third party or top level
-package named `jodie`, not a local `jodie.py`.
+尽管在某些环境中会发生这种情况，
+但不应假定主二进制文件所在的目录位于sys.path中。 
+在这种情况下，代码应假定“ import jodie”是指名为“ jodie”的第三方或顶级软件包，
+而不是本地的“ jodie.py”。
 
 
 <a id="s2.4-exceptions"></a>
 <a id="24-exceptions"></a>
 
 <a id="exceptions"></a>
-### 2.4 Exceptions 
+### 2.4 例外情况 
 
-Exceptions are allowed but must be used carefully.
+允许例外，但必须谨慎使用。
 
 <a id="s2.4.1-definition"></a>
 <a id="241-definition"></a>
 
 <a id="exceptions-definition"></a>
-#### 2.4.1 Definition 
+#### 2.4.1 定义 
 
-Exceptions are a means of breaking out of the normal flow of control of a code
-block to handle errors or other exceptional conditions.
+异常是一种打破常规的代码块控制流以处理错误或其他特殊情况的方法。
 
 <a id="s2.4.2-pros"></a>
 <a id="242-pros"></a>
 
 <a id="exceptions-pros"></a>
-#### 2.4.2 Pros 
-
-The control flow of normal operation code is not cluttered by error-handling
-code. It also allows the control flow to skip multiple frames when a certain
-condition occurs, e.g., returning from N nested functions in one step instead of
-having to carry-through error codes.
+#### 2.4.2 优点 
+正常操作代码的控制流程不会因错误处理代码而混乱。
+它还允许控制流在发生某种情况时跳过多个帧，例如，在一个步骤中从N个嵌套函数返回而不必携带错误代码。
 
 <a id="s2.4.3-cons"></a>
 <a id="243-cons"></a>
 
 <a id="exceptions-cons"></a>
-#### 2.4.3 Cons 
+#### 2.4.3 缺点 
 
-May cause the control flow to be confusing. Easy to miss error cases when making
-library calls.
+可能导致控制流程混乱。在进行库调用时容易错过错误情况。
+
 
 <a id="s2.4.4-decision"></a>
 <a id="244-decision"></a>
 
 <a id="exceptions-decision"></a>
-#### 2.4.4 Decision 
+#### 2.4.4 决定 
 
 Exceptions must follow certain conditions:
 
